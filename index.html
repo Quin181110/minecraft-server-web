@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tạo Server Minecraft</title>
+</head>
+<body>
+    <h1>Tạo Server Minecraft</h1>
+    <button onclick="createServer()">Tạo Server</button>
+    <p id="status"></p>
+
+    <script>
+        function createServer() {
+            document.getElementById("status").innerText = "Đang tạo server...";
+            fetch("https://your-firebase-url.cloudfunctions.net/createServer", { method: "POST" })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("status").innerText = "Server đã tạo: " + data.ip;
+            })
+            .catch(error => {
+                document.getElementById("status").innerText = "Lỗi khi tạo server!";
+            });
+        }
+    </script>
+</body>
+</html>
